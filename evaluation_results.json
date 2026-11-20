@@ -3,17 +3,17 @@
     "id": "Q1",
     "category": "Diagnostics & Flight Controller (Page 12)",
     "question": "What does a rear status LED pattern of 3 rapid red flashes followed by 2 solid amber flashes indicate on the AeroVantage X9, and what action should the technician take?",
-    "answer": "The rear status LED pattern of **3 rapid red flashes followed by 2 solid amber flashes** signals a **Primary IMU Magnetometer Calibration Fault and Compass Interference Lockout (Error Code\u202fERR_IMU_MAG_07)**.  \n\n**Required technician action:**  \n- **Do not arm the motors.**  \n- **Relocate the aircraft** to a location at least **15\u202fmeters away from any steel structures**.  \n- **Run a full 6\u2011axis compass calibration** before attempting to arm again.  \n\n*Source: Page\u202f12 of the AeroVantage X9 Industrial Hexacopter Technical Maintenance Manual.*",
+    "answer": "The rear status LED pattern of **3 rapid red flashes followed by 2 solid amber flashes** signals a **Primary IMU Magnetometer Calibration Fault and Compass Interference Lockout (Error Code\u202fERR_IMU_MAG_07)**.  \nThe technician must **not arm the motors**, move the aircraft **at least 15\u202fm away from any steel structures**, and then **run a full 6\u2011axis compass calibration**.  \n\n*Source: Page\u202f12*",
     "sources": [
       "Page 12"
     ],
-    "latency_seconds": 2.45
+    "latency_seconds": 1.92
   },
   {
     "id": "Q2",
     "category": "Power Systems & Battery Safety (Page 29)",
     "question": "What are the specific cell voltage thresholds for Stage 1 Low Voltage Warning, Stage 2 Forced Emergency Return-to-Home (RTH), and Stage 3 Critical Auto-Land on the AeroVantage X9?",
-    "answer": "- **Stage\u202f1 \u2013 Low Voltage Warning:** 3.60\u202fV per cell (amber telemetry alert) \u2013 *Page\u202f29*  \n- **Stage\u202f2 \u2013 Forced Emergency Return\u2011to\u2011Home (RTH):** 3.45\u202fV per cell \u2013 *Page\u202f29*  \n- **Stage\u202f3 \u2013 Critical Auto\u2011Land:** 3.30\u202fV per cell \u2013 *Page\u202f29*",
+    "answer": "- **Stage\u202f1 Low Voltage Warning:** 3.60\u202fV per cell\u3010Page\u202f29\u3011  \n- **Stage\u202f2 Forced Emergency Return\u2011to\u2011Home (RTH):** 3.45\u202fV per cell\u3010Page\u202f29\u3011  \n- **Stage\u202f3 Critical Auto\u2011Land:** 3.30\u202fV per cell\u3010Page\u202f29\u3011",
     "sources": [
       "Page 29"
     ],
@@ -27,7 +27,7 @@
     "sources": [
       "Page 44"
     ],
-    "latency_seconds": 1.29
+    "latency_seconds": 1.58
   },
   {
     "id": "Q4",
@@ -35,7 +35,7 @@
     "question": "What are the exact numerical torque specifications (in Nm) for the carbon-fiber airframe rotor mounting bolts in Module 1.0?",
     "answer": "[not found]",
     "sources": [],
-    "latency_seconds": 1.44
+    "latency_seconds": 7.22
   },
   {
     "id": "Q5",
@@ -43,6 +43,6 @@
     "question": "What is the maximum flight altitude and obstacle avoidance sensor range of the AeroVantage X9?",
     "answer": "[not found]",
     "sources": [],
-    "latency_seconds": 7.47
+    "latency_seconds": 13.39
   }
 ]

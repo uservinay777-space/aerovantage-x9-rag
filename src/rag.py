@@ -58,7 +58,7 @@ Your task is to answer the question below STRICTLY and EXCLUSIVELY using ONLY th
 
 CRITICAL GROUNDING RULES:
 1. ONLY rely on facts directly mentioned in the excerpts below. Do NOT extrapolate, speculate, or bring in outside knowledge.
-2. If the excerpts do not contain sufficient facts to answer the question, or if quantitative parameters are missing, state: "The provided AeroVantage X9 technical manual does not contain information to answer this question."
+2. If the excerpts do not contain the exact answer, or if quantitative parameters are missing/unstated, output EXACTLY: "[not found]". Do not add any additional explanation.
 3. Cite the exact page number(s) (e.g. Page 12, Page 29) for each factual specification stated in your answer.
 4. Keep the answer direct, professional, and accurate.
 
@@ -86,7 +86,7 @@ def generate_answer_llm(prompt: str) -> str:
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a strictly grounded technical assistant. Answer only using the provided manual excerpts without hallucination."
+                        "content": "You are a strictly grounded technical assistant. Answer only using the provided manual excerpts without hallucination. If the answer cannot be found in the provided excerpts, reply with exactly '[not found]'."
                     },
                     {"role": "user", "content": prompt}
                 ],
@@ -157,17 +157,8 @@ def fallback_extract_answer(prompt: str) -> str:
                 "Operations must be aborted immediately if wind gusts exceed this certified limit."
             )
 
-    # Torque specifications unprovided (Page 1)
-    if "torque" in p_lower or "airframe" in p_lower or "rotor" in p_lower:
-        return (
-            "The provided AeroVantage X9 technical manual does not contain specific numerical torque values (in Nm) "
-            "for the carbon-fiber airframe rotor mounting bolts. While Chapter 1 / Module 1.0 (Page 1) references "
-            "carbon-fiber airframe torque specifications, it explicitly states that no external assumptions or "
-            "unverified parameters may be substituted for explicit tables, and defers to specific numbered sections."
-        )
-
-    # Default refusal
-    return "The provided AeroVantage X9 technical manual does not contain information to answer this question."
+    # Torque specifications unprovided (Page 1) or out of scope
+    return "[not found]"
 
 
 def answer(question: str) -> dict:
@@ -192,7 +183,16 @@ def answer(question: str) -> dict:
 
     # Post-processing check: strict refusal normalization
     ans_lower = gen_answer.lower()
-    negative_phrases = ["[not found]", "does not contain", "not mentioned", "no information", "not provided"]
+    negative_phrases = [
+        "[not found]",
+        "does not contain",
+        "not contain information",
+        "not mentioned",
+        "not provided",
+        "no information",
+        "cannot be found",
+        "not specified",
+    ]
     if any(phrase in ans_lower for phrase in negative_phrases):
         return {
             "answer": "[not found]",

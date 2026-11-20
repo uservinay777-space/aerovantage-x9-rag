@@ -90,14 +90,16 @@ def run_evaluation() -> List[Dict]:
 def generate_markdown_summary(results: List[Dict]):
     md_lines = [
         "### Evaluation Results Summary\n",
-        "| ID | Evaluation Category | Question | Cited Sources | Grounding Status |",
-        "|---|---|---|---|---|"
+        "| ID | Evaluation Category | Question | Generated Answer | Cited Sources | Grounding Status |",
+        "|---|---|---|---|---|---|"
     ]
     for r in results:
-        status = "Strict Refusal (No Hallucination)" if not r["sources"] else "Grounded Ground Truth"
+        status = "Strict Refusal (`[not found]`)" if not r["sources"] else "Grounded Ground Truth"
         src_str = ", ".join(r["sources"]) if r["sources"] else "None (Unstated in Corpus)"
-        q_snippet = (r["question"][:65] + "...") if len(r["question"]) > 65 else r["question"]
-        md_lines.append(f"| **{r['id']}** | {r['category']} | {q_snippet} | `{src_str}` | {status} |")
+        q_snippet = (r["question"][:55] + "...") if len(r["question"]) > 55 else r["question"]
+        ans_snippet = (r["answer"][:60] + "...") if len(r["answer"]) > 60 else r["answer"]
+        ans_snippet = ans_snippet.replace("\n", " ").replace("|", "/")
+        md_lines.append(f"| **{r['id']}** | {r['category']} | {q_snippet} | `{ans_snippet}` | `{src_str}` | {status} |")
 
     with open("evaluation_summary.md", "w") as f:
         f.write("\n".join(md_lines))
