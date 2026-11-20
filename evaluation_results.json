@@ -7,7 +7,7 @@
     "sources": [
       "Page 12"
     ],
-    "latency_seconds": 3.58
+    "latency_seconds": 2.45
   },
   {
     "id": "Q2",
@@ -17,7 +17,7 @@
     "sources": [
       "Page 29"
     ],
-    "latency_seconds": 1.45
+    "latency_seconds": 1.03
   },
   {
     "id": "Q3",
@@ -27,22 +27,22 @@
     "sources": [
       "Page 44"
     ],
-    "latency_seconds": 1.4
+    "latency_seconds": 1.29
   },
   {
     "id": "Q4",
     "category": "Grounded Negative Test / Unstated Parameters (Page 1)",
     "question": "What are the exact numerical torque specifications (in Nm) for the carbon-fiber airframe rotor mounting bolts in Module 1.0?",
-    "answer": "The provided AeroVantage X9 technical manual does not contain information to answer this question.\u202f(See Page\u202f1, which only outlines procedural guidelines for Module\u202f1.0 and does not list any numerical torque values.)",
+    "answer": "[not found]",
     "sources": [],
-    "latency_seconds": 1.2
+    "latency_seconds": 1.44
   },
   {
     "id": "Q5",
     "category": "Hallucination & Out-of-Scope Prevention",
     "question": "What is the maximum flight altitude and obstacle avoidance sensor range of the AeroVantage X9?",
-    "answer": "The provided AeroVantage X9 technical manual does not contain information to answer this question.",
+    "answer": "[not found]",
     "sources": [],
-    "latency_seconds": 11.88
+    "latency_seconds": 7.47
   }
 ]

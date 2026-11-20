@@ -104,10 +104,17 @@ def answer(question: str) -> dict:
     """
 ```
 
-### Strict Grounding Rules
+### Strict Grounding Rules & Post-Processing Check
 1. **Context-Only Derivation:** Answers are generated strictly using the retrieved excerpts.
 2. **Refusal on Missing Parameters:** If a query asks for a parameter that is mentioned in a title but has no numerical value in the text (e.g. Question 4: torque specs in Module 1.0), the system strictly refuses to fabricate numbers.
-3. **Refusal on Out-of-Scope Queries:** If a query asks about features not covered in the manual (e.g. Question 5: flight altitude and obstacle avoidance), the system strictly states that the manual does not contain this information, returning `sources: []`.
+3. **Refusal on Out-of-Scope Queries:** If a query asks about features not covered in the manual (e.g. Question 5: flight altitude and obstacle avoidance), the system strictly flags the content as absent.
+4. **Post-Processing Normalization:** If the response contains `"[not found]"` or indicator phrases like `"does not contain"`, `"not mentioned"`, `"no information"`, or `"not provided"`, `answer()` forces the return value to:
+   ```json
+   {
+     "answer": "[not found]",
+     "sources": []
+   }
+   ```
 
 ---
 
@@ -120,8 +127,8 @@ Running `python evaluate.py` executes all 5 evaluation questions across the asse
 | **Q1** | Diagnostics & Flight Controller (Page 12) | *What does a rear status LED pattern of 3 rapid red flashes followed by 2 solid amber flashes indicate on the AeroVantage X9, and what action should the technician take?* | `Page 12` | **Grounded Ground Truth** |
 | **Q2** | Power Systems & Battery Safety (Page 29) | *What are the specific cell voltage thresholds for Stage 1 Low Voltage Warning, Stage 2 Forced Emergency Return-to-Home (RTH), and Stage 3 Critical Auto-Land on the AeroVantage X9?* | `Page 29` | **Grounded Ground Truth** |
 | **Q3** | Environmental Operational Limits (Page 44) | *What is the maximum certified sustained wind speed limit for safe flight operations of the AeroVantage X9 industrial hexacopter?* | `Page 44` | **Grounded Ground Truth** |
-| **Q4** | Grounded Negative Test / Unstated Parameters (Page 1) | *What are the exact numerical torque specifications (in Nm) for the carbon-fiber airframe rotor mounting bolts in Module 1.0?* | `None (Unstated in Corpus)` | **Strict Refusal (No Hallucination)** |
-| **Q5** | Hallucination & Out-of-Scope Prevention | *What is the maximum flight altitude and obstacle avoidance sensor range of the AeroVantage X9?* | `None (Unstated in Corpus)` | **Strict Refusal (No Hallucination)** |
+| **Q4** | Grounded Negative Test / Unstated Parameters (Page 1) | *What are the exact numerical torque specifications (in Nm) for the carbon-fiber airframe rotor mounting bolts in Module 1.0?* | `None (Unstated in Corpus)` | **Strict Refusal (`[not found]`)** |
+| **Q5** | Hallucination & Out-of-Scope Prevention | *What is the maximum flight altitude and obstacle avoidance sensor range of the AeroVantage X9?* | `None (Unstated in Corpus)` | **Strict Refusal (`[not found]`)** |
 
 ### Verifiable Output Extracts
 
@@ -146,11 +153,11 @@ Running `python evaluate.py` executes all 5 evaluation questions across the asse
 > **Sources:** `['Page 44']`
 
 #### Question 4 (Negative Grounding / Torque Specifications):
-> **Answer:** The provided AeroVantage X9 technical manual does not contain information to answer this question. (See Page 1, which only outlines procedural guidelines for Module 1.0 and does not list any numerical torque values.)  
+> **Answer:** `[not found]`  
 > **Sources:** `[]`
 
 #### Question 5 (Out of Scope / Refusal):
-> **Answer:** The provided AeroVantage X9 technical manual does not contain information to answer this question.  
+> **Answer:** `[not found]`  
 > **Sources:** `[]`
 
 ---

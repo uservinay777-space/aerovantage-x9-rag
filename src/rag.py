@@ -190,17 +190,23 @@ def answer(question: str) -> dict:
     prompt = build_prompt(question, docs, metadatas)
     gen_answer = generate_answer_llm(prompt)
 
+    # Post-processing check: strict refusal normalization
+    ans_lower = gen_answer.lower()
+    negative_phrases = ["[not found]", "does not contain", "not mentioned", "no information", "not provided"]
+    if any(phrase in ans_lower for phrase in negative_phrases):
+        return {
+            "answer": "[not found]",
+            "sources": []
+        }
+
     # Associate relevant sources
     matched_sources = []
     for s in retrieved_sources:
         if s.lower() in gen_answer.lower():
             matched_sources.append(s)
 
-    if not matched_sources:
-        if "does not contain" in gen_answer.lower():
-            matched_sources = []
-        elif retrieved_sources:
-            matched_sources = [retrieved_sources[0]]
+    if not matched_sources and retrieved_sources:
+        matched_sources = [retrieved_sources[0]]
 
     return {
         "answer": gen_answer,
