@@ -1,0 +1,48 @@
+[
+  {
+    "id": "Q1",
+    "category": "Diagnostics & Flight Controller (Page 12)",
+    "question": "What does a rear status LED pattern of 3 rapid red flashes followed by 2 solid amber flashes indicate on the AeroVantage X9, and what action should the technician take?",
+    "answer": "The rear status LED pattern of **3 rapid red flashes followed by 2 solid amber flashes** signals a **Primary IMU Magnetometer Calibration Fault and Compass Interference Lockout (Error Code\u202fERR_IMU_MAG_07)**.  \n\n**Required technician action:**  \n- **Do not arm the motors.**  \n- **Relocate the aircraft** to a location at least **15\u202fmeters away from any steel structures**.  \n- **Run a full 6\u2011axis compass calibration** before attempting to arm again.  \n\n*Source: Page\u202f12 of the AeroVantage X9 Industrial Hexacopter Technical Maintenance Manual.*",
+    "sources": [
+      "Page 12"
+    ],
+    "latency_seconds": 3.58
+  },
+  {
+    "id": "Q2",
+    "category": "Power Systems & Battery Safety (Page 29)",
+    "question": "What are the specific cell voltage thresholds for Stage 1 Low Voltage Warning, Stage 2 Forced Emergency Return-to-Home (RTH), and Stage 3 Critical Auto-Land on the AeroVantage X9?",
+    "answer": "- **Stage\u202f1 \u2013 Low Voltage Warning:** 3.60\u202fV per cell (amber telemetry alert) \u2013 *Page\u202f29*  \n- **Stage\u202f2 \u2013 Forced Emergency Return\u2011to\u2011Home (RTH):** 3.45\u202fV per cell \u2013 *Page\u202f29*  \n- **Stage\u202f3 \u2013 Critical Auto\u2011Land:** 3.30\u202fV per cell \u2013 *Page\u202f29*",
+    "sources": [
+      "Page 29"
+    ],
+    "latency_seconds": 1.45
+  },
+  {
+    "id": "Q3",
+    "category": "Environmental Operational Limits (Page 44)",
+    "question": "What is the maximum certified sustained wind speed limit for safe flight operations of the AeroVantage X9 industrial hexacopter?",
+    "answer": "The AeroVantage\u202fX9 is certified for safe industrial flight operations in maximum sustained wind speeds of **38\u202fknots** (equivalent to **70\u202fkm/h** or **19.5\u202fm/s**)\u3010Page\u202f44\u3011.",
+    "sources": [
+      "Page 44"
+    ],
+    "latency_seconds": 1.4
+  },
+  {
+    "id": "Q4",
+    "category": "Grounded Negative Test / Unstated Parameters (Page 1)",
+    "question": "What are the exact numerical torque specifications (in Nm) for the carbon-fiber airframe rotor mounting bolts in Module 1.0?",
+    "answer": "The provided AeroVantage X9 technical manual does not contain information to answer this question.\u202f(See Page\u202f1, which only outlines procedural guidelines for Module\u202f1.0 and does not list any numerical torque values.)",
+    "sources": [],
+    "latency_seconds": 1.2
+  },
+  {
+    "id": "Q5",
+    "category": "Hallucination & Out-of-Scope Prevention",
+    "question": "What is the maximum flight altitude and obstacle avoidance sensor range of the AeroVantage X9?",
+    "answer": "The provided AeroVantage X9 technical manual does not contain information to answer this question.",
+    "sources": [],
+    "latency_seconds": 11.88
+  }
+]

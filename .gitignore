@@ -1,0 +1,17 @@
+# Python & Virtual Environments
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environment & Secrets
+.env
+
+# ChromaDB persistent storage cache
+chroma_db/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
