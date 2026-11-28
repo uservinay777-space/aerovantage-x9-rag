@@ -4,3 +4,5 @@ pypdf>=6.20.0
 python-dotenv>=1.2.0
 openai>=2.40.0
 google-genai>=1.40.0
+streamlit>=1.30.0
+
